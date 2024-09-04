@@ -3,6 +3,7 @@ import Ship from "./ship";
 export default Gameboard = () => {
   const size = 10;
   let layout = [];
+  let shipsOnBoard = [];
 
   for (let row = 0; row < size; row++) {
     layout[row] = [];
@@ -17,6 +18,7 @@ export default Gameboard = () => {
       layout[row][col + i] = Ship;
       i++;
     }
+    shipsOnBoard.push(Ship);
   };
 
   const getLayout = function getGameboardLayout() {
@@ -35,5 +37,12 @@ export default Gameboard = () => {
     layout[row][col] = -1;
   };
 
-  return { size, placeShip, getLayout, receiveAttack };
+  const allShipsSunk = function determineIfAllShipsOnBoardAreSunk() {
+    for (const ship of shipsOnBoard) {
+      if (!ship.isSunk()) return false;
+    }
+    return true;
+  };
+
+  return { size, placeShip, getLayout, receiveAttack, allShipsSunk };
 };
