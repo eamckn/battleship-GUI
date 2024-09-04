@@ -1,5 +1,3 @@
-import Ship from "./ship";
-
 export default Gameboard = () => {
   const size = 10;
   let layout = [];
