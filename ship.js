@@ -1,20 +1,16 @@
-export default Ship = (length) => {
-  length;
-  let hitCount = 0;
-  let sunk = false;
+export default class Ship {
+  constructor(length) {
+    this.length = length;
+    this.hitCount = 0;
+    this.sunk = false;
+  }
 
-  const hit = function increaseHitCountOnShip() {
-    hitCount++;
+  hit = function increaseHitCountOnShip() {
+    this.hitCount++;
   };
 
-  const getHitCount = function getCurrentHitCount() {
-    return hitCount;
+  isSunk = function checkIfShipHasBeenSunk() {
+    this.sunk = this.hitCount === this.length ? true : false;
+    return this.sunk;
   };
-
-  const isSunk = function checkIfShipHasBeenSunk() {
-    sunk = hitCount === length ? true : false;
-    return sunk;
-  };
-
-  return { hit, getHitCount, isSunk, length };
-};
+}
