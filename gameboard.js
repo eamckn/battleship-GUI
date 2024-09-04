@@ -27,8 +27,12 @@ export default Gameboard = () => {
     if (typeof layout[row][col] === "object") {
       layout[row][col].hit();
     } else {
-      layout[row][col] = -1;
+      logMiss(row, col);
     }
+  };
+
+  const logMiss = function logMissedAttackFromPlayer(row, col) {
+    layout[row][col] = -1;
   };
 
   return { size, placeShip, getLayout, receiveAttack };
