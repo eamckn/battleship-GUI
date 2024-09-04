@@ -28,3 +28,13 @@ it("ReceiveAttack() logs missed hit on gameboard", () => {
   gameboard.receiveAttack(2, 2);
   expect(gameboard.getLayout()[2][2]).toBe(-1);
 });
+
+it("Gameboard reports when all ships are not sunk", () => {
+  expect(gameboard.allShipsSunk()).toBe(false);
+});
+
+it("Gameboard reports when all ships are sunk", () => {
+  gameboard.receiveAttack(1, 2);
+  gameboard.receiveAttack(1, 3);
+  expect(gameboard.allShipsSunk()).toBe(true);
+});
