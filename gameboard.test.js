@@ -18,3 +18,13 @@ it("Gameboard takes horizontal ship placement starting from left", () => {
   expect(gameboard.getLayout()[1][2]).toBe(cruiser);
   expect(gameboard.getLayout()[1][3]).toBe(cruiser);
 });
+
+it("ReceiveAttack() adds hit to ship on hit", () => {
+  gameboard.receiveAttack(1, 1);
+  expect(cruiser.getHitCount()).toBe(1);
+});
+
+it("ReceiveAttack() logs missed hit on gameboard", () => {
+  gameboard.receiveAttack(2, 2);
+  expect(gameboard.getLayout()[2][2]).toBe(-1);
+});
