@@ -1,8 +1,8 @@
 import Gameboard from "./gameboard.js";
 
-export default Player = (type = "player") => {
-  type;
-  const board = Gameboard();
-
-  return { type, board };
-};
+export default class Player {
+  constructor(type = "player") {
+    this.type = type;
+    this.board = new Gameboard();
+  }
+}
