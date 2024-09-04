@@ -23,5 +23,13 @@ export default Gameboard = () => {
     return layout;
   };
 
-  return { size, placeShip, getLayout };
+  const receiveAttack = function receiveAttackFromOtherPlayer(row, col) {
+    if (typeof layout[row][col] === "object") {
+      layout[row][col].hit();
+    } else {
+      layout[row][col] = -1;
+    }
+  };
+
+  return { size, placeShip, getLayout, receiveAttack };
 };
