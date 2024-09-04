@@ -14,6 +14,9 @@ export default function DOM_manip() {
         const square = document.createElement("div");
         const value = board1.layout[row][col];
         square.setAttribute("value", value);
+        square.setAttribute("row", row);
+        square.setAttribute("col", col);
+
         player1Board.appendChild(square);
       }
     }
@@ -23,11 +26,17 @@ export default function DOM_manip() {
         const square = document.createElement("div");
         const value = board2.layout[row][col];
         square.setAttribute("value", value);
+        square.setAttribute("row", row);
+        square.setAttribute("col", col);
         player2Board.appendChild(square);
       }
     }
     main.appendChild(player2Board);
   };
 
-  return { renderInitial };
+  const updateSquare = function updateSquareValueAfterAttack(square, value) {
+    square.setAttribute("value", value);
+  };
+
+  return { renderInitial, updateSquare };
 }
