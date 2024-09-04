@@ -23,9 +23,14 @@ export default class Gameboard {
   receiveAttack = function receiveAttackFromOtherPlayer(row, col) {
     if (typeof this.layout[row][col] === "object") {
       this.layout[row][col].hit();
-    } else {
+      this.logHit(row, col);
+    } else if (this.layout[row][col] === 0) {
       this.logMiss(row, col);
     }
+  };
+
+  logHit = function logSuccessfulAttackFromPlayer(row, col) {
+    this.layout[row][col] = 1;
   };
 
   logMiss = function logMissedAttackFromPlayer(row, col) {
