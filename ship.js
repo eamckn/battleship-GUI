@@ -16,5 +16,5 @@ export default Ship = (length) => {
     return sunk;
   };
 
-  return { hit, getHitCount, isSunk };
+  return { hit, getHitCount, isSunk, length };
 };
