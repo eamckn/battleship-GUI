@@ -35,3 +35,15 @@ div.gameboard {
 .gameboard div {
   border: 1px solid black;
 }
+
+.gameboard div[value="[object Object]"] {
+  background-color: orange;
+}
+
+.gameboard div[value="1"] {
+  background-color: blue;
+}
+
+.gameboard div[value="-1"] {
+  background-color: red;
+}
