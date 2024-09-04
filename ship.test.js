@@ -2,6 +2,10 @@ import Ship from "./ship.js";
 
 const cruiser = Ship(3);
 
+it("Ship length is read properly", () => {
+  expect(cruiser.length).toBe(3);
+});
+
 it("Hit count is incremented", () => {
   cruiser.hit();
   expect(cruiser.getHitCount()).toBe(1);
