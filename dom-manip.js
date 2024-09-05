@@ -1,8 +1,8 @@
 const main = document.querySelector("div#main");
-const player1Board = document.createElement("div");
-player1Board.className = "gameboard player1";
-const player2Board = document.createElement("div");
-player2Board.className = "gameboard player2";
+const player1BoardDisplay = document.createElement("div");
+player1BoardDisplay.className = "gameboard player1";
+const player2BoardDisplay = document.createElement("div");
+player2BoardDisplay.className = "gameboard player2";
 
 export default function DOM_manip() {
   const renderInitial = function renderBothPlayerBoardsOnShipPlacements(
@@ -17,10 +17,10 @@ export default function DOM_manip() {
         square.setAttribute("row", row);
         square.setAttribute("col", col);
 
-        player1Board.appendChild(square);
+        player1BoardDisplay.appendChild(square);
       }
     }
-    main.appendChild(player1Board);
+    main.appendChild(player1BoardDisplay);
     for (let row = 0; row < board2.size; row++) {
       for (let col = 0; col < board2.size; col++) {
         const square = document.createElement("div");
@@ -28,10 +28,10 @@ export default function DOM_manip() {
         square.setAttribute("value", value);
         square.setAttribute("row", row);
         square.setAttribute("col", col);
-        player2Board.appendChild(square);
+        player2BoardDisplay.appendChild(square);
       }
     }
-    main.appendChild(player2Board);
+    main.appendChild(player2BoardDisplay);
   };
 
   const updateSquare = function updateSquareValueAfterAttack(square, value) {
