@@ -19,7 +19,6 @@ export default function DOM_manip() {
         player1BoardDisplay.appendChild(square);
       }
     }
-    main.appendChild(player1BoardDisplay);
     for (let row = 0; row < board2.size; row++) {
       for (let col = 0; col < board2.size; col++) {
         const square = document.createElement("div");
@@ -30,7 +29,6 @@ export default function DOM_manip() {
         player2BoardDisplay.appendChild(square);
       }
     }
-    main.appendChild(player2BoardDisplay);
   };
 
   const initalizeShips = function initalizeShipsToBePlacedOnPlayerOneBoard() {
