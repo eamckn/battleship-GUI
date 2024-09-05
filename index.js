@@ -98,3 +98,15 @@ const isGameOver = function checkIfGameIsOverBasedOnShipsSunk() {
 };
 
 player2BoardDisplay.addEventListener("click", playerOneTurn);
+
+/* To implement drag and drop
+
+- Load the page in with blank boards
+- Have ships display below board
+    - Simply make them divs
+    - Size them appropriately 
+    - Add button for each to swap vertical/horizontal
+- Add drag and drop features to the ships
+- Make the squares valid drop targets
+    - Drop event will store the ships info?
+*/
