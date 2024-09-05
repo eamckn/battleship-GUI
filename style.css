@@ -36,7 +36,7 @@ div.gameboard {
   border: 1px solid black;
 }
 
-.gameboard div[value="[object Object]"] {
+.gameboard.player1 div[value="[object Object]"] {
   background-color: orange;
 }
 
