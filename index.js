@@ -71,7 +71,7 @@ const computerPlayerTurn = function allowClicksOnPlayerOneBoardFromComputer() {
       dom.updateSquare(target, player1.board.layout[row][col]);
       if (isGameOver()) return;
       player2BoardDisplay.addEventListener("click", playerOneTurn);
-    }, 1000);
+    }, 500);
   }
 };
 
