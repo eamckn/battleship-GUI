@@ -41,6 +41,9 @@ const playerOneTurn = function allowClicksOnPlayerTwoBoard(event) {
     player1BoardDisplay.addEventListener("click", playerTwoTurn);
     player2BoardDisplay.removeEventListener("click", playerOneTurn);
   }
+  if (isGameOver()) {
+    player1BoardDisplay.removeEventListener("click", playerTwoTurn);
+  }
 };
 
 const playerTwoTurn = function allowClicksOnPlayerOneBoard(event) {
@@ -53,6 +56,15 @@ const playerTwoTurn = function allowClicksOnPlayerOneBoard(event) {
     dom.updateSquare(target, player1.board.layout[row][col]);
     player2BoardDisplay.addEventListener("click", playerOneTurn);
     player1BoardDisplay.removeEventListener("click", playerTwoTurn);
+  }
+  if (isGameOver()) {
+    player2BoardDisplay.removeEventListener("click", playerOneTurn);
+  }
+};
+
+const isGameOver = function checkIfGameIsOverBasedOnShipsSunk() {
+  for (const player of players) {
+    if (player.board.allShipsSunk()) return true;
   }
 };
 
