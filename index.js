@@ -9,27 +9,51 @@ const players = [player1, player2];
 
 const dom = DOM();
 
-player1.board.placeShip(new Ship(2), 1, 6);
-player1.board.placeShip(new Ship(3), 3, 3);
-player1.board.placeShip(new Ship(3), 7, 0);
-player1.board.placeShip(new Ship(4), 6, 4);
-player1.board.placeShip(new Ship(5), 2, 3);
+function initializeBoards() {
+  player1.board.placeShip(new Ship(2), 1, 6);
+  player1.board.placeShip(new Ship(3), 3, 3);
+  player1.board.placeShip(new Ship(3), 7, 0);
+  player1.board.placeShip(new Ship(4), 6, 4);
+  player1.board.placeShip(new Ship(5), 2, 3);
 
-player2.board.placeShip(new Ship(2), 1, 6);
-player2.board.placeShip(new Ship(3), 3, 3);
-player2.board.placeShip(new Ship(3), 7, 0);
-player2.board.placeShip(new Ship(4), 6, 4);
-player2.board.placeShip(new Ship(5), 2, 3);
+  player2.board.placeShip(new Ship(2), 1, 6);
+  player2.board.placeShip(new Ship(3), 3, 3);
+  player2.board.placeShip(new Ship(3), 7, 0);
+  player2.board.placeShip(new Ship(4), 6, 4);
+  player2.board.placeShip(new Ship(5), 2, 3);
 
-dom.renderInitial(player1.board, player2.board);
+  dom.renderInitial(player1.board, player2.board);
+}
 
-const player1Board = document.querySelector(".gameboard.player1");
-const player2Board = document.querySelector(".gameboard.player2");
+initializeBoards();
 
-player1Board.addEventListener("click", (event) => {
-  let target = event.target;
-  let row = target.getAttribute("row");
-  let col = target.getAttribute("col");
-  player1.board.receiveAttack(row, col);
-  dom.updateSquare(target, player1.board.layout[row][col]);
-});
+const player1BoardDisplay = document.querySelector(".gameboard.player1");
+const player2BoardDisplay = document.querySelector(".gameboard.player2");
+
+const playerOneTurn = function allowClicksOnPlayerTwoBoard(event) {
+  const target = event.target;
+  const row = target.getAttribute("row");
+  const col = target.getAttribute("col");
+  const selectedSquareValue = player2.board.layout[row][col];
+  if (selectedSquareValue !== 1 && selectedSquareValue !== -1) {
+    player2.board.receiveAttack(row, col);
+    dom.updateSquare(target, player2.board.layout[row][col]);
+    player1BoardDisplay.addEventListener("click", playerTwoTurn);
+    player2BoardDisplay.removeEventListener("click", playerOneTurn);
+  }
+};
+
+const playerTwoTurn = function allowClicksOnPlayerOneBoard(event) {
+  const target = event.target;
+  const row = target.getAttribute("row");
+  const col = target.getAttribute("col");
+  const selectedSquareValue = player1.board.layout[row][col];
+  if (selectedSquareValue !== 1 && selectedSquareValue !== -1) {
+    player1.board.receiveAttack(row, col);
+    dom.updateSquare(target, player1.board.layout[row][col]);
+    player2BoardDisplay.addEventListener("click", playerOneTurn);
+    player1BoardDisplay.removeEventListener("click", playerTwoTurn);
+  }
+};
+
+player2BoardDisplay.addEventListener("click", playerOneTurn);
