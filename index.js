@@ -38,16 +38,13 @@ const playerOneTurn = function allowClicksOnPlayerTwoBoard(event) {
   if (selectedSquareValue !== 1 && selectedSquareValue !== -1) {
     player2.board.receiveAttack(row, col);
     dom.updateSquare(target, player2.board.layout[row][col]);
+    player2BoardDisplay.removeEventListener("click", playerOneTurn);
+    if (isGameOver()) return;
     if (player2.type === "computer") {
-      player2BoardDisplay.removeEventListener("click", playerOneTurn);
       computerPlayerTurn();
     } else {
       player1BoardDisplay.addEventListener("click", playerTwoTurn);
-      player2BoardDisplay.removeEventListener("click", playerOneTurn);
     }
-  }
-  if (isGameOver()) {
-    player1BoardDisplay.removeEventListener("click", playerTwoTurn);
   }
 };
 
@@ -72,6 +69,7 @@ const computerPlayerTurn = function allowClicksOnPlayerOneBoardFromComputer() {
     setTimeout(() => {
       player1.board.receiveAttack(row, col);
       dom.updateSquare(target, player1.board.layout[row][col]);
+      if (isGameOver()) return;
       player2BoardDisplay.addEventListener("click", playerOneTurn);
     }, 1000);
   }
