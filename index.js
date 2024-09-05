@@ -38,11 +38,40 @@ const playerOneTurn = function allowClicksOnPlayerTwoBoard(event) {
   if (selectedSquareValue !== 1 && selectedSquareValue !== -1) {
     player2.board.receiveAttack(row, col);
     dom.updateSquare(target, player2.board.layout[row][col]);
-    player1BoardDisplay.addEventListener("click", playerTwoTurn);
-    player2BoardDisplay.removeEventListener("click", playerOneTurn);
+    if (player2.type === "computer") {
+      player2BoardDisplay.removeEventListener("click", playerOneTurn);
+      computerPlayerTurn();
+    } else {
+      player1BoardDisplay.addEventListener("click", playerTwoTurn);
+      player2BoardDisplay.removeEventListener("click", playerOneTurn);
+    }
   }
   if (isGameOver()) {
     player1BoardDisplay.removeEventListener("click", playerTwoTurn);
+  }
+};
+
+const computerPlayerTurn = function allowClicksOnPlayerOneBoardFromComputer() {
+  let selectedSquareValue;
+  let row;
+  let col;
+  let target;
+  do {
+    row = Math.floor(Math.random() * 10);
+    col = Math.floor(Math.random() * 10);
+    console.log(row);
+    console.log(col);
+    target = player1BoardDisplay.querySelector(
+      `div[row = "${row}"][col = "${col}"]`
+    );
+    console.log(target);
+    selectedSquareValue = player1.board.layout[row][col];
+    console.log(selectedSquareValue);
+  } while (selectedSquareValue === 1 || selectedSquareValue === -1);
+  if (selectedSquareValue !== 1 && selectedSquareValue !== -1) {
+    player1.board.receiveAttack(row, col);
+    dom.updateSquare(target, player1.board.layout[row][col]);
+    player2BoardDisplay.addEventListener("click", playerOneTurn);
   }
 };
 
