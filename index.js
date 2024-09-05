@@ -69,9 +69,11 @@ const computerPlayerTurn = function allowClicksOnPlayerOneBoardFromComputer() {
     console.log(selectedSquareValue);
   } while (selectedSquareValue === 1 || selectedSquareValue === -1);
   if (selectedSquareValue !== 1 && selectedSquareValue !== -1) {
-    player1.board.receiveAttack(row, col);
-    dom.updateSquare(target, player1.board.layout[row][col]);
-    player2BoardDisplay.addEventListener("click", playerOneTurn);
+    setTimeout(() => {
+      player1.board.receiveAttack(row, col);
+      dom.updateSquare(target, player1.board.layout[row][col]);
+      player2BoardDisplay.addEventListener("click", playerOneTurn);
+    }, 1000);
   }
 };
 
