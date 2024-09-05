@@ -1,8 +1,6 @@
 const main = document.querySelector("div#main");
-const player1BoardDisplay = document.createElement("div");
-player1BoardDisplay.className = "gameboard player1";
-const player2BoardDisplay = document.createElement("div");
-player2BoardDisplay.className = "gameboard player2";
+const player1BoardDisplay = document.querySelector("div.gameboard.player1");
+const player2BoardDisplay = document.querySelector("div.gameboard.player2");
 
 export default function DOM_manip() {
   const renderInitial = function renderBothPlayerBoardsOnShipPlacements(
