@@ -34,14 +34,19 @@ export default function DOM_manip() {
   const initalizeShips = function initalizeShipsToBePlacedOnPlayerOneBoard() {
     const patrol = document.createElement("div");
     patrol.className = "ship player1 patrol";
+    patrol.setAttribute("draggable", true);
     const sub = document.createElement("div");
     sub.className = "ship player1 sub";
+    sub.setAttribute("draggable", true);
     const destroyer = document.createElement("div");
     destroyer.className = "ship player1 destroyer";
+    destroyer.setAttribute("draggable", true);
     const battleship = document.createElement("div");
     battleship.className = "ship player1 battleship";
+    battleship.setAttribute("draggable", true);
     const carrier = document.createElement("div");
     carrier.className = "ship player1 carrier";
+    carrier.setAttribute("draggable", true);
 
     player1ShipsDisplay.appendChild(patrol);
     player1ShipsDisplay.appendChild(sub);
