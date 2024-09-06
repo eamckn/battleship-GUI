@@ -27,6 +27,8 @@ function initializeBoards() {
 
 initializeBoards();
 
+dom.initalizeShips();
+
 const player1BoardDisplay = document.querySelector(".gameboard.player1");
 const player2BoardDisplay = document.querySelector(".gameboard.player2");
 
