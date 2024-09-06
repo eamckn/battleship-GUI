@@ -4,6 +4,11 @@
   box-sizing: border-box;
 }
 
+:root {
+  --gameboard-width: 500px;
+  --gameboard-height: 500px;
+}
+
 html {
   height: 100%;
 }
@@ -22,9 +27,19 @@ body {
   align-items: center;
 }
 
+.display {
+  height: 100%;
+  width: 50%;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
 div.gameboard {
-  width: 500px;
-  height: 500px;
+  width: var(--gameboard-width);
+  height: var(--gameboard-height);
   background-color: white;
 
   display: grid;
@@ -46,4 +61,41 @@ div.gameboard {
 
 .gameboard div[value="-1"] {
   background-color: red;
+}
+
+.ships {
+  width: var(--gameboard-width);
+  height: auto;
+
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  row-gap: 1rem;
+}
+
+div.ship {
+  height: calc(var(--gameboard-height) / 10);
+
+  background-color: orange;
+  border: 1px solid black;
+}
+
+div.patrol {
+  width: calc(var(--gameboard-width) / 10 * 2);
+}
+
+div.sub {
+  width: calc(var(--gameboard-width) / 10 * 3);
+}
+
+div.destroyer {
+  width: calc(var(--gameboard-width) / 10 * 3);
+}
+
+div.battleship {
+  width: calc(var(--gameboard-width) / 10 * 4);
+}
+
+div.carrier {
+  width: calc(var(--gameboard-width) / 10 * 5);
 }
