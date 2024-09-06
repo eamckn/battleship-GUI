@@ -39,7 +39,7 @@ export default function DOM_manip() {
     const destroyer = document.createElement("div");
     destroyer.className = "ship player1 destroyer";
     const battleship = document.createElement("div");
-    battleship.className = "ship player1 patbattleshiprol";
+    battleship.className = "ship player1 battleship";
     const carrier = document.createElement("div");
     carrier.className = "ship player1 carrier";
 
