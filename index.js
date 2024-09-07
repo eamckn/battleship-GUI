@@ -38,7 +38,7 @@ const makeDragTargets = function makeShipsForPlayerOneDraggable() {
 
 const dragstart = function (event) {
   event.dataTransfer.setData("text/plain", event.target.getAttribute("id"));
-  console.log("dragging");
+  //console.log("dragging");
   setTimeout(() => {
     event.target.classList.add("dragging");
   }, 0);
@@ -77,11 +77,9 @@ const dragLeave = function (event) {
 const drop = function (event) {
   event.target.classList.remove("drag-over");
   const shipID = event.dataTransfer.getData("text/plain");
-  const draggedShip = document.getElementById(shipID);
-  const length = Number(draggedShip.getAttribute("length"));
-  //console.log(draggedShip);
-  const row = Number(event.target.getAttribute("row"));
-  const col = Number(event.target.getAttribute("col"));
+  const { draggedShip, length, row, col } = {
+    ...extractInfo(shipID, event.target),
+  };
   if (length + col > 10) {
     throw new Error(
       "Ship coordinates will go off the board. Please drop the ship at a different coordinate."
@@ -97,6 +95,16 @@ const drop = function (event) {
     }
   }
 };
+
+const extractInfo =
+  function extractAdditionalDOMInfoFromDroppedShipAndItsDropTarget(id, square) {
+    const draggedShip = document.getElementById(id);
+    const length = Number(draggedShip.getAttribute("length"));
+    const row = Number(square.getAttribute("row"));
+    const col = Number(square.getAttribute("col"));
+
+    return { draggedShip, length, row, col };
+  };
 
 initializeBoards();
 dom.renderInitial(player1.board, player2.board);
