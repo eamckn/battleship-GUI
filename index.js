@@ -88,7 +88,7 @@ const drop = function (event) {
     );
   } else {
     player1.board.placeShip(new Ship(length), row, col);
-    dom.addShip(player1.board);
+    dom.addShip(player1.board, length, row, col);
     draggedShip.removeEventListener("dragstart", dragstart);
     draggedShip.removeAttribute("draggable");
     draggedShip.classList.add("dropped");

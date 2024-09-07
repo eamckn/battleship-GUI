@@ -34,15 +34,18 @@ export default function DOM_manip() {
     }
   };
 
-  const addShip = function updateBoardDisplayAfterShipDrop(board) {
-    for (let row = 0; row < board.size; row++) {
-      for (let col = 0; col < board.size; col++) {
-        const square = document.querySelector(
-          `.player1 div[row="${row}"][col="${col}"]`
-        );
-        const value = board.layout[row][col];
-        square.setAttribute("value", value);
-      }
+  const addShip = function updateBoardDisplayAfterShipDrop(
+    board,
+    length,
+    row,
+    col
+  ) {
+    for (let i = 0; i < length; i++) {
+      const square = document.querySelector(
+        `.player1 div[row="${row}"][col="${col + i}"]`
+      );
+      const value = board.layout[row][col + i];
+      square.setAttribute("value", value);
     }
   };
 
