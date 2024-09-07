@@ -80,23 +80,23 @@ div.ship {
   border: 1px solid black;
 }
 
-div.patrol {
+div#player1-patrol {
   width: calc(var(--gameboard-width) / 10 * 2);
 }
 
-div.sub {
+div#player1-sub {
   width: calc(var(--gameboard-width) / 10 * 3);
 }
 
-div.destroyer {
+div#player1-destroyer {
   width: calc(var(--gameboard-width) / 10 * 3);
 }
 
-div.battleship {
+div#player1-battleship {
   width: calc(var(--gameboard-width) / 10 * 4);
 }
 
-div.carrier {
+div#player1-carrier {
   width: calc(var(--gameboard-width) / 10 * 5);
 }
 
