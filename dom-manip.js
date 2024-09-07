@@ -51,34 +51,34 @@ export default function DOM_manip() {
 
   const initalizeShips = function initalizeShipsToBePlacedOnPlayerOneBoard() {
     const patrol = document.createElement("div");
-    patrol.className = "ship player1 patrol";
+    patrol.className = "ship";
     patrol.setAttribute("draggable", true);
     patrol.setAttribute("length", 2);
-    patrol.setAttribute("ship", "patrol");
+    patrol.setAttribute("id", "player1-patrol");
 
     const sub = document.createElement("div");
-    sub.className = "ship player1 sub";
+    sub.className = "ship";
     sub.setAttribute("draggable", true);
     sub.setAttribute("length", 3);
-    sub.setAttribute("ship", "sub");
+    sub.setAttribute("id", "player1-sub");
 
     const destroyer = document.createElement("div");
-    destroyer.className = "ship player1 destroyer";
+    destroyer.className = "ship";
     destroyer.setAttribute("draggable", true);
     destroyer.setAttribute("length", 3);
-    destroyer.setAttribute("ship", "destroyer");
+    destroyer.setAttribute("id", "player1-destroyer");
 
     const battleship = document.createElement("div");
-    battleship.className = "ship player1 battleship";
+    battleship.className = "ship";
     battleship.setAttribute("draggable", true);
     battleship.setAttribute("length", 4);
-    battleship.setAttribute("ship", "battleship");
+    battleship.setAttribute("id", "player1-battleship");
 
     const carrier = document.createElement("div");
-    carrier.className = "ship player1 carrier";
+    carrier.className = "ship";
     carrier.setAttribute("draggable", true);
     carrier.setAttribute("length", 5);
-    carrier.setAttribute("ship", "carrier");
+    carrier.setAttribute("id", "player1-carrier");
 
     player1ShipsDisplay.appendChild(patrol);
     player1ShipsDisplay.appendChild(sub);

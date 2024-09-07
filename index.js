@@ -37,7 +37,7 @@ const makeDragTargets = function makeShipsForPlayerOneDraggable() {
 };
 
 const dragstart = function (event) {
-  event.dataTransfer.setData("text/plain", event.target.getAttribute("ship"));
+  event.dataTransfer.setData("text/plain", event.target.getAttribute("id"));
   console.log("dragging");
   setTimeout(() => {
     event.target.classList.add("dragging");
@@ -76,10 +76,10 @@ const dragLeave = function (event) {
 
 const drop = function (event) {
   event.target.classList.remove("drag-over");
-  const shipType = event.dataTransfer.getData("text/plain");
-  const draggedShip = document.querySelector(`div.ship[ship="${shipType}"]`);
+  const shipID = event.dataTransfer.getData("text/plain");
+  const draggedShip = document.getElementById(shipID);
   const length = Number(draggedShip.getAttribute("length"));
-  console.log(draggedShip);
+  //console.log(draggedShip);
   const row = Number(event.target.getAttribute("row"));
   const col = Number(event.target.getAttribute("col"));
   if (length + col > 10) {
