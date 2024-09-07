@@ -78,6 +78,10 @@ const drop = function (event) {
     throw new Error(
       "Ship coordinates will go off the board. Please drop the ship at a different coordinate."
     );
+  } else if (shipOverlaps(player1.board, row, col, length)) {
+    throw new Error(
+      "You cannot have overlapping ships. Please drop the ship at a different coordinate."
+    );
   } else {
     player1.board.placeShip(new Ship(length), row, col);
     dom.addShip(player1.board, length, row, col);
@@ -99,6 +103,20 @@ const extractInfo =
 
     return { draggedShip, length, row, col };
   };
+
+const shipOverlaps = function droppedShipOverlapsWithAnotherAlreadyPlacedShip(
+  board,
+  row,
+  col,
+  length
+) {
+  for (let i = 0; i < length; i++) {
+    if (board.layout[row][col + i] !== 0) {
+      return true;
+    }
+  }
+  return false;
+};
 
 initializeBoards();
 dom.renderInitial(player1.board, player2.board);
