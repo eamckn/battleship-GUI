@@ -21,8 +21,6 @@ function initializeBoards() {
   player2.board.placeShip(new Ship(3), 7, 0);
   player2.board.placeShip(new Ship(4), 6, 4);
   player2.board.placeShip(new Ship(5), 2, 3);
-
-  dom.renderInitial(player1.board, player2.board);
 }
 
 const makeDragTargets = function makeShipsForPlayerOneDraggable() {
@@ -97,6 +95,7 @@ const drop = function (event) {
 };
 
 initializeBoards();
+dom.renderInitial(player1.board, player2.board);
 dom.initalizeShips();
 
 makeDragTargets();
