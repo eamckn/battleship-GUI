@@ -10,11 +10,11 @@ const players = [player1, player2];
 const dom = DOM();
 
 function initializeBoards() {
-  player1.board.placeShip(new Ship(2), 1, 6);
-  player1.board.placeShip(new Ship(3), 3, 3);
-  player1.board.placeShip(new Ship(3), 7, 0);
-  player1.board.placeShip(new Ship(4), 6, 4);
-  player1.board.placeShip(new Ship(5), 2, 3);
+  // player1.board.placeShip(new Ship(2), 1, 6);
+  // player1.board.placeShip(new Ship(3), 3, 3);
+  // player1.board.placeShip(new Ship(3), 7, 0);
+  // player1.board.placeShip(new Ship(4), 6, 4);
+  // player1.board.placeShip(new Ship(5), 2, 3);
 
   player2.board.placeShip(new Ship(2), 1, 6);
   player2.board.placeShip(new Ship(3), 3, 3);
@@ -25,9 +25,82 @@ function initializeBoards() {
   dom.renderInitial(player1.board, player2.board);
 }
 
-initializeBoards();
+const makeDragTargets = function makeShipsForPlayerOneDraggable() {
+  const playerOneShips = document.querySelectorAll(".ships.player1 .ship");
 
+  playerOneShips.forEach((ship) => {
+    ship.addEventListener("dragstart", dragstart);
+    ship.addEventListener("dragend", dragend);
+  });
+};
+
+const dragstart = function (event) {
+  event.dataTransfer.setData("text/plain", event.target.getAttribute("ship"));
+  console.log("dragging");
+  setTimeout(() => {
+    event.target.classList.add("dragging");
+  }, 0);
+};
+
+const dragend = function (event) {
+  event.target.classList.remove("dragging");
+};
+
+const makeDropTargets =
+  function makeAllSquaresOnPlayerOneBoardValidDropTargets() {
+    const squares = document.querySelectorAll(".gameboard.player1 div");
+
+    squares.forEach((square) => {
+      square.addEventListener("dragenter", dragEnter);
+      square.addEventListener("dragover", dragOver);
+      square.addEventListener("dragleave", dragLeave);
+      square.addEventListener("drop", drop);
+    });
+  };
+
+const dragEnter = function (event) {
+  event.preventDefault();
+  event.target.classList.add("drag-over");
+};
+
+const dragOver = function (event) {
+  event.preventDefault();
+  event.target.classList.add("drag-over");
+};
+
+const dragLeave = function (event) {
+  event.target.classList.remove("drag-over");
+};
+
+const drop = function (event) {
+  event.target.classList.remove("drag-over");
+  const shipType = event.dataTransfer.getData("text/plain");
+  const draggedShip = document.querySelector(`div.ship[ship="${shipType}"]`);
+  const length = Number(draggedShip.getAttribute("length"));
+  console.log(draggedShip);
+  const row = Number(event.target.getAttribute("row"));
+  const col = Number(event.target.getAttribute("col"));
+  if (length + col > 10) {
+    throw new Error(
+      "Ship coordinates will go off the board. Please drop the ship at a different coordinate."
+    );
+  } else {
+    player1.board.placeShip(new Ship(length), row, col);
+    dom.addShip(player1.board);
+    draggedShip.removeEventListener("dragstart", dragstart);
+    draggedShip.removeAttribute("draggable");
+    draggedShip.classList.add("dropped");
+    if (player1.board.shipsOnBoard.length === 5) {
+      startGame();
+    }
+  }
+};
+
+initializeBoards();
 dom.initalizeShips();
+
+makeDragTargets();
+makeDropTargets();
 
 const player1BoardDisplay = document.querySelector(".gameboard.player1");
 const player2BoardDisplay = document.querySelector(".gameboard.player2");
@@ -99,7 +172,9 @@ const isGameOver = function checkIfGameIsOverBasedOnShipsSunk() {
   }
 };
 
-player2BoardDisplay.addEventListener("click", playerOneTurn);
+const startGame = function startGameOnceAllShipsArePlaced() {
+  player2BoardDisplay.addEventListener("click", playerOneTurn);
+};
 
 /* To implement drag and drop
 
@@ -111,4 +186,7 @@ player2BoardDisplay.addEventListener("click", playerOneTurn);
 - Add drag and drop features to the ships
 - Make the squares valid drop targets
     - Drop event will store the ships info?
+
+
+  - When creating each ship div, store it's Ship data in attribute called value
 */
