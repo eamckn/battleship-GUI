@@ -51,7 +51,7 @@ div.gameboard {
   border: 1px solid black;
 }
 
-.gameboard.player1 div[value="[object Object]"] {
+.gameboard div[value="[object Object]"] {
   background-color: orange;
 }
 
@@ -98,4 +98,13 @@ div.battleship {
 
 div.carrier {
   width: calc(var(--gameboard-width) / 10 * 5);
+}
+
+.dragging,
+.dropped {
+  background-color: transparent !important;
+}
+
+.drag-over {
+  background-color: rgb(203, 203, 203) !important;
 }
