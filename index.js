@@ -14,12 +14,6 @@ const player2BoardDisplay = document.querySelector(".gameboard.player2");
 
 const initializeBoards =
   function initializeDefaultShipPositionsForPlayerBoards() {
-    // player1.board.placeShip(new Ship(2), 1, 6);
-    // player1.board.placeShip(new Ship(3), 3, 3);
-    // player1.board.placeShip(new Ship(3), 7, 0);
-    // player1.board.placeShip(new Ship(4), 6, 4);
-    // player1.board.placeShip(new Ship(5), 2, 3);
-
     player2.board.placeShip(new Ship(2), 1, 6);
     player2.board.placeShip(new Ship(3), 3, 3);
     player2.board.placeShip(new Ship(3), 7, 0);
