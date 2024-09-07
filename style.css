@@ -108,3 +108,7 @@ div.carrier {
 .drag-over {
   background-color: rgb(203, 203, 203) !important;
 }
+
+.hide {
+  display: none;
+}

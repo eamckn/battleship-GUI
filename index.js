@@ -173,6 +173,7 @@ const isGameOver = function checkIfGameIsOverBasedOnShipsSunk() {
 };
 
 const startGame = function startGameOnceAllShipsArePlaced() {
+  dom.hideShips();
   player2BoardDisplay.addEventListener("click", playerOneTurn);
 };
 

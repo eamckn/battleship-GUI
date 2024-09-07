@@ -91,10 +91,15 @@ export default function DOM_manip() {
     square.setAttribute("value", value);
   };
 
+  const hideShips = function hidePlayerShipsDisplayAfterAllShipsArePlaced() {
+    document.querySelector("div.ships.player1").classList.add("hide");
+  };
+
   return {
     renderInitial,
     updateSquare,
     initalizeShips,
     addShip,
+    hideShips,
   };
 }
