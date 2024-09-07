@@ -7,6 +7,8 @@ const player1 = new Player();
 const player2 = new Player("computer");
 const players = [player1, player2];
 
+let nextComputerMoves = [];
+
 const dom = DOM();
 
 const player1BoardDisplay = document.querySelector(".gameboard.player1");
@@ -144,16 +146,18 @@ const playerOneTurn = function allowClicksOnPlayerTwoBoard(event) {
 };
 
 const computerPlayerTurn = function allowClicksOnPlayerOneBoardFromComputer() {
-  let [row, col, selectedSquare, selectedSquareValue] = [...computerRandom()];
-  while (selectedSquareValue === 1 || selectedSquareValue === -1) {
-    [row, col, selectedSquare, selectedSquareValue] = [...computerRandom()];
-  }
-  if (selectedSquareValue !== 1 && selectedSquareValue !== -1) {
-    setTimeout(() => {
-      computerValidAttack(selectedSquare, row, col);
-      if (isGameOver()) return;
-      player2BoardDisplay.addEventListener("click", playerOneTurn);
-    }, 500);
+  if (nextComputerMoves.length === 0) {
+    let [row, col, selectedSquare, selectedSquareValue] = [...computerRandom()];
+    while (selectedSquareValue === 1 || selectedSquareValue === -1) {
+      [row, col, selectedSquare, selectedSquareValue] = [...computerRandom()];
+    }
+    computerMove(selectedSquare, row, col);
+  } else {
+    const [row, col] = [...nextComputerMoves.pop()];
+    const selectedSquare = player1BoardDisplay.querySelector(
+      `div[row = "${row}"][col = "${col}"]`
+    );
+    computerMove(selectedSquare, row, col);
   }
 };
 
@@ -169,13 +173,55 @@ const computerRandom =
     return [row, col, selectedSquare, selectedSquareValue];
   };
 
+const computerMove = function commenceComputerMoveWithInfoGatheredDuringTurn(
+  square,
+  row,
+  col
+) {
+  setTimeout(() => {
+    computerValidAttack(square, row, col);
+    if (isGameOver()) return;
+    player2BoardDisplay.addEventListener("click", playerOneTurn);
+  }, 500);
+};
+
 const computerValidAttack = function carryOutValidAttackMadeByComputerPlayer(
   square,
   row,
   col
 ) {
   player1.board.receiveAttack(row, col);
+  if (player1.board.layout[row][col] === 1) {
+    nextComputerMoves = nextComputerMoves.concat(getNextMoves(row, col));
+    //console.log(nextComputerMoves);
+  }
   dom.updateSquare(square, player1.board.layout[row][col]);
+};
+
+const getNextMoves = function getComputerPlayerNextMovesAfterSuccessfulHit(
+  row,
+  col
+) {
+  // Currently only check horizontally because ships must be vertical
+  const adjacentCoords = [
+    [row, col - 1],
+    [row, col + 1],
+  ];
+  const validAdjacentCoords = adjacentCoords.filter((coordinate) => {
+    return (
+      coordinate[0] < 10 &&
+      coordinate[0] >= 0 &&
+      coordinate[1] < 10 &&
+      coordinate[1] >= 0
+    );
+  });
+  const adjacentCoordsNotHit = validAdjacentCoords.filter((coordinate) => {
+    return (
+      player1.board.layout[coordinate[0]][coordinate[1]] !== 1 &&
+      player1.board.layout[coordinate[0]][coordinate[1]] !== -1
+    );
+  });
+  return adjacentCoordsNotHit;
 };
 
 const playerTwoTurn = function allowClicksOnPlayerOneBoard(event) {
