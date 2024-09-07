@@ -142,12 +142,20 @@ const computerPlayerTurn = function allowClicksOnPlayerOneBoardFromComputer() {
   } while (selectedSquareValue === 1 || selectedSquareValue === -1);
   if (selectedSquareValue !== 1 && selectedSquareValue !== -1) {
     setTimeout(() => {
-      player1.board.receiveAttack(row, col);
-      dom.updateSquare(target, player1.board.layout[row][col]);
+      computerValidAttack(target, row, col);
       if (isGameOver()) return;
       player2BoardDisplay.addEventListener("click", playerOneTurn);
     }, 500);
   }
+};
+
+const computerValidAttack = function carryOutValidAttackMadeByComputerPlayer(
+  square,
+  row,
+  col
+) {
+  player1.board.receiveAttack(row, col);
+  dom.updateSquare(square, player1.board.layout[row][col]);
 };
 
 const playerTwoTurn = function allowClicksOnPlayerOneBoard(event) {
