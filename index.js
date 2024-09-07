@@ -126,30 +126,30 @@ const playerOneTurn = function allowClicksOnPlayerTwoBoard(event) {
 };
 
 const computerPlayerTurn = function allowClicksOnPlayerOneBoardFromComputer() {
-  let selectedSquareValue;
-  let row;
-  let col;
-  let target;
-  do {
-    row = Math.floor(Math.random() * 10);
-    col = Math.floor(Math.random() * 10);
-    console.log(row);
-    console.log(col);
-    target = player1BoardDisplay.querySelector(
-      `div[row = "${row}"][col = "${col}"]`
-    );
-    console.log(target);
-    selectedSquareValue = player1.board.layout[row][col];
-    console.log(selectedSquareValue);
-  } while (selectedSquareValue === 1 || selectedSquareValue === -1);
+  let [row, col, selectedSquare, selectedSquareValue] = [...computerRandom()];
+  while (selectedSquareValue === 1 || selectedSquareValue === -1) {
+    [row, col, selectedSquare, selectedSquareValue] = [...computerRandom()];
+  }
   if (selectedSquareValue !== 1 && selectedSquareValue !== -1) {
     setTimeout(() => {
-      computerValidAttack(target, row, col);
+      computerValidAttack(selectedSquare, row, col);
       if (isGameOver()) return;
       player2BoardDisplay.addEventListener("click", playerOneTurn);
     }, 500);
   }
 };
+
+const computerRandom =
+  function getRandomcomputerSelectionForCoordinatesToCheck() {
+    const row = Math.floor(Math.random() * 10);
+    const col = Math.floor(Math.random() * 10);
+    const selectedSquare = player1BoardDisplay.querySelector(
+      `div[row = "${row}"][col = "${col}"]`
+    );
+    const selectedSquareValue = player1.board.layout[row][col];
+
+    return [row, col, selectedSquare, selectedSquareValue];
+  };
 
 const computerValidAttack = function carryOutValidAttackMadeByComputerPlayer(
   square,
@@ -186,18 +186,3 @@ const startGame = function startGameOnceAllShipsArePlaced() {
   dom.hideShips();
   player2BoardDisplay.addEventListener("click", playerOneTurn);
 };
-
-/* To implement drag and drop
-
-- Load the page in with blank boards
-- Have ships display below board
-    - Simply make them divs
-    - Size them appropriately 
-    - Add button for each to swap vertical/horizontal
-- Add drag and drop features to the ships
-- Make the squares valid drop targets
-    - Drop event will store the ships info?
-
-
-  - When creating each ship div, store it's Ship data in attribute called value
-*/
