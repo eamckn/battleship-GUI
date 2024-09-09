@@ -27,6 +27,18 @@ body {
   align-items: center;
 }
 
+dialog[open] {
+  margin: auto;
+  padding: 2rem;
+
+  display: flex;
+  flex-direction: column;
+}
+
+dialog * {
+  display: block;
+}
+
 .display {
   height: 100%;
   width: 50%;
@@ -51,7 +63,7 @@ div.gameboard {
   border: 1px solid black;
 }
 
-.gameboard div[value="[object Object]"] {
+.gameboard.player1 div[value="[object Object]"] {
   background-color: orange;
 }
 
