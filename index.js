@@ -2,6 +2,7 @@ import Ship from "./ship.js";
 import Gameboard from "./gameboard.js";
 import Player from "./player.js";
 import DOM from "./dom-manip.js";
+import { showNameDialog, player1Name } from "./dialog.js";
 
 const player1 = new Player();
 const player2 = new Player("computer");
@@ -126,6 +127,8 @@ dom.initalizeShips();
 
 makeDragTargets();
 makeDropTargets();
+
+showNameDialog();
 
 const playerOneTurn = function allowClicksOnPlayerTwoBoard(event) {
   const target = event.target;
