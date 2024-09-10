@@ -93,6 +93,7 @@ const drop = function (event) {
     draggedShip.classList.add("dropped");
     if (player1.board.shipsOnBoard.length === 5) {
       startGame();
+      document.querySelector("div.display.player2").classList.remove("hide");
     }
   }
 };

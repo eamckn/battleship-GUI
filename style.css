@@ -40,10 +40,6 @@ dialog[open] {
   align-items: center;
 }
 
-.text-center {
-  text-align: center;
-}
-
 dialog#player-name button {
   height: 10%;
   width: 20%;
