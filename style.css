@@ -16,7 +16,8 @@ html {
 
 body {
   height: 100%;
-  background-color: grey;
+  background-image: url("./battleship.jpg");
+  background-size: cover;
 }
 
 #main {
