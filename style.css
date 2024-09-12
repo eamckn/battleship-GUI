@@ -1,3 +1,19 @@
+@font-face {
+  font-family: "army-regular";
+  src: url("./assets/fonts/army_rust-webfont.woff2") format("woff2"),
+    url("./assets/fonts/army_rust-webfont.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "gunplay-regular";
+  src: url("./assets/fonts/gunplay_rg-webfont.woff2") format("woff2"),
+    url("./assets/fonts/gunplay_rg-webfont.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -16,7 +32,7 @@ html {
 
 body {
   height: 100%;
-  background-image: url("./battleship.jpg");
+  background-image: url("./assets/imgs/battleship.jpg");
   background-size: cover;
 }
 
@@ -44,13 +60,20 @@ dialog[open] {
   background-color: var(--navy-grey);
 }
 
+dialog * {
+  display: block;
+  font-family: "gunplay-regular";
+}
+
+dialog h1 {
+  font-family: "army-regular";
+  font-size: 6rem;
+  letter-spacing: 0.5rem;
+}
+
 dialog#player-name button {
   height: 10%;
   width: 20%;
-}
-
-dialog * {
-  display: block;
 }
 
 .display {
