@@ -1,5 +1,4 @@
 import Ship from "./ship.js";
-import Gameboard from "./gameboard.js";
 import Player from "./player.js";
 import DOM from "./dom-manip.js";
 import { showNameDialog, player1Name } from "./dialog.js";

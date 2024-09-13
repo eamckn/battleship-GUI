@@ -1,7 +1,5 @@
 export { showNameDialog, player1Name };
 
-const body = document.querySelector("body");
-
 let player1Name;
 
 const showNameDialog = function displayDialogForFirstPlayerNameEntry() {

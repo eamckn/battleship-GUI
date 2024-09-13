@@ -1,7 +1,3 @@
-import Ship from "./ship.js";
-import Gameboard from "./gameboard.js";
-
-const main = document.querySelector("div#main");
 const player1BoardDisplay = document.querySelector("div.gameboard.player1");
 const player2BoardDisplay = document.querySelector("div.gameboard.player2");
 const player1ShipsDisplay = document.querySelector("div.ships.player1");
