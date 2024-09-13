@@ -75,6 +75,7 @@ dialog h1 {
 
 dialog p {
   font-size: 3rem;
+  text-align: center;
 }
 
 dialog label {
