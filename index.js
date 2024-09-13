@@ -140,7 +140,10 @@ const playerOneTurn = function allowClicksOnPlayerTwoBoard(event) {
     player2.board.receiveAttack(row, col);
     dom.updateSquare(target, player2.board.layout[row][col]);
     player2BoardDisplay.removeEventListener("click", playerOneTurn);
-    if (isGameOver()) return;
+    if (isGameOver()) {
+      showWinner();
+      return;
+    }
     if (player2.type === "computer") {
       computerPlayerTurn();
     } else {
@@ -184,7 +187,10 @@ const computerMove = function commenceComputerMoveWithInfoGatheredDuringTurn(
 ) {
   setTimeout(() => {
     computerValidAttack(square, row, col);
-    if (isGameOver()) return;
+    if (isGameOver()) {
+      showWinner();
+      return;
+    }
     player2BoardDisplay.addEventListener("click", playerOneTurn);
   }, 500);
 };
@@ -241,6 +247,7 @@ const playerTwoTurn = function allowClicksOnPlayerOneBoard(event) {
   }
   if (isGameOver()) {
     player2BoardDisplay.removeEventListener("click", playerOneTurn);
+    showWinner();
   }
 };
 
@@ -253,4 +260,15 @@ const isGameOver = function checkIfGameIsOverBasedOnShipsSunk() {
 const startGame = function startGameOnceAllShipsArePlaced() {
   dom.hideShips();
   player2BoardDisplay.addEventListener("click", playerOneTurn);
+};
+
+const showWinner = function displayWhoWonTheGame() {
+  const winnerDialog = document.querySelector("dialog#winner");
+  const winnerMessage = document.querySelector("p#winner-message");
+  if (player1.board.allShipsSunk()) {
+    winnerMessage.innerHTML = "The computer won! Better luck next time.";
+  } else {
+    winnerMessage.innerHTML = `You win, ${player1Name}! Well done.`;
+  }
+  winnerDialog.showModal();
 };
