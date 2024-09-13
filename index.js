@@ -6,13 +6,11 @@ import { showNameDialog, player1Name } from "./dialog.js";
 const player1 = new Player();
 const player2 = new Player("computer");
 const players = [player1, player2];
-
-let nextComputerMoves = [];
-
-const dom = DOM();
-
 const player1BoardDisplay = document.querySelector(".gameboard.player1");
 const player2BoardDisplay = document.querySelector(".gameboard.player2");
+const dom = DOM();
+
+let nextComputerMoves = [];
 
 const initializeBoards =
   function initializeDefaultShipPositionsForPlayerBoards() {
@@ -119,15 +117,6 @@ const shipOverlaps = function droppedShipOverlapsWithAnotherAlreadyPlacedShip(
   }
   return false;
 };
-
-initializeBoards();
-dom.renderInitial(player1.board, player2.board);
-dom.initalizeShips();
-
-makeDragTargets();
-makeDropTargets();
-
-showNameDialog();
 
 const playerOneTurn = function allowClicksOnPlayerTwoBoard(event) {
   const target = event.target;
@@ -269,3 +258,12 @@ const showWinner = function displayWhoWonTheGame() {
   }
   winnerDialog.showModal();
 };
+
+initializeBoards();
+dom.renderInitial(player1.board, player2.board);
+dom.initalizeShips();
+
+makeDragTargets();
+makeDropTargets();
+
+showNameDialog();
