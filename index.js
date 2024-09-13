@@ -35,7 +35,6 @@ const makeDragTargets = function makeShipsForPlayerOneDraggable() {
 
 const dragstart = function (event) {
   event.dataTransfer.setData("text/plain", event.target.getAttribute("id"));
-  //console.log("dragging");
   setTimeout(() => {
     event.target.classList.add("dragging");
   }, 0);
@@ -203,7 +202,6 @@ const computerValidAttack = function carryOutValidAttackMadeByComputerPlayer(
   player1.board.receiveAttack(row, col);
   if (player1.board.layout[row][col] === 1) {
     nextComputerMoves = nextComputerMoves.concat(getNextMoves(row, col));
-    //console.log(nextComputerMoves);
   }
   dom.updateSquare(square, player1.board.layout[row][col]);
 };
